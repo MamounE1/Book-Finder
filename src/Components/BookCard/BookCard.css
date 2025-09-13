@@ -1,0 +1,12 @@
+.imgStyle{
+    width: 8rem;
+    height: 10rem;
+}
+
+.bookContainer{
+    padding: 2rem;
+    margin: 1rem;
+    width: 10rem;
+    background-color: whitesmoke;
+    box-shadow: 0 0 10px rgba(105, 105, 105, 0.3);
+}
