@@ -1,20 +1,39 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import BookList from "./Components/BookList/BookList.jsx"
 import Header from "./Components/Header/Header.jsx"
 import "./index.css"
 
 export default function App() {
+  const loadMoreRef = useRef(null);
   const [books, setBooks] = useState([])
+  const [startIndex, setStartIndex] = useState(0);
+
   useEffect(() => {
-    fetch("https://www.googleapis.com/books/v1/volumes?q=harry+potter&startIndex=10&maxResults=40")
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=harry+potter&startIndex=${startIndex}&maxResults=20`)
       .then(res => res.json())
-      .then(data => setBooks(data.items || []))
+      .then(data => {
+        setBooks(prev => [...prev, ...(data.items || [])])
+      })
+  }, [startIndex])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      if(entries[0].isIntersecting){
+        setStartIndex(prev => prev + 20)
+      }
+    })
+
+    if(loadMoreRef.current){
+      observer.observe(loadMoreRef.current)
+    }
+
+    return () => observer.disconnect()
   }, [])
   
   return (
     <>
       <Header />
-      <BookList books={books}/>
+      <BookList books={books} loadMoreRef={loadMoreRef}/>
     </>
   )
 }
