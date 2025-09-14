@@ -12,7 +12,7 @@ export default function App() {
   const [startIndex, setStartIndex] = useState(0);
 
   useEffect(() => {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=${startIndex}&maxResults=20`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&startIndex=${startIndex}&maxResults=20`)
       .then(res => res.json())
       .then(data => {
         setBooks(prev => [...prev, ...(data.items || [])])
@@ -37,6 +37,7 @@ export default function App() {
     setBooks([])
     setStartIndex(0)
     setSearchQuery(text)
+    setText("")
   }
 
   return (
