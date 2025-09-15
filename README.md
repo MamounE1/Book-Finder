@@ -1,5 +1,40 @@
-# MyBookFinder
+# LitScout
 
 ## Summary
 
-An interactive Book Finder app built using React. Soon users will be able to view all sorts of books from an API, and see the data about each book. Users will be able to use a search bar to find certain books, and use filters to find books that are to their liking.
+LitScout is an interactive book search application built with React. Users can search for and browse books from the Google Books API, view detailed information for each book, and enjoy a seamless, responsive UI. The app features infinite scroll for continuous browsing and a dynamic search bar for filtering results efficiently.
+
+Check out the live app [LitScout Live Demo](https://litscout.netlify.app/)!
+
+---
+
+## Features
+
+- **Search Books:** Users can search for books by title, author, or keyword, with results fetched dynamically from the Google Books API.
+- **Infinite Scroll:** Automatically loads more books as users scroll, providing a smooth browsing experience without manual pagination.
+- **Book Cards:** Displays detailed book information (title, author(s), thumbnail, and description) in reusable, responsive components.
+
+---
+
+## Technologies
+
+- React
+- JavaScript
+- HTML5 / CSS3
+- Vite
+- Netlify
+
+---
+
+## Future Improvements
+
+- **Filter & Sorting Options:** Allow users to filter by category, language, or publication date, and sort results.
+- **Favorites & User Accounts:** Add the ability for users to save favorite books with authentication.
+- **Backend Integration:** Introduce a server to manage saved books, caching, and API requests securely.
+- **Responsive Design Enhancements:** Improve layout and styling for smaller screens and various devices, ensuring consistent usability.
+
+---
+
+## License
+
+© 2025 Mamoun Elmamoun. All rights reserved.
