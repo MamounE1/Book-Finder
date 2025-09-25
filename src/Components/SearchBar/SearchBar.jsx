@@ -2,8 +2,9 @@ import "./SearchBar.css"
 
 export default function SearchBar({text, setText, onSearch}){
     return (
-        <div>
-            <input 
+        <div className="searchContainer">
+            <input
+                className = "searchBar"
                 value={text} 
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={(e) => {
@@ -11,7 +12,7 @@ export default function SearchBar({text, setText, onSearch}){
                 }} 
                 placeholder="Search books..."
             />
-            <button type="submit" onClick={onSearch}>Search</button>
+            <button className="searchButton" type="submit" onClick={onSearch}>Search</button>
         </div>
     )
 }

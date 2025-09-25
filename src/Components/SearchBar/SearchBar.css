@@ -1,0 +1,11 @@
+.searchContainer{
+    margin: 1rem;
+}
+.searchBar{
+    padding: 0.3rem;
+    width: 25rem;
+}
+
+.searchButton{
+    padding: 0.3rem;
+}
