@@ -14,7 +14,7 @@ export default function BookList({books, loadMoreRef, favorites, toggleFavorite}
                     />
                 ))}
             </div>
-            <div ref={loadMoreRef}></div>
+            <div className="sentinel" ref={loadMoreRef}></div>
         </>
     )
 }

@@ -17,6 +17,7 @@ export default function App() {
     })
 
   useEffect(() => {
+    if (!searchQuery) return;
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&startIndex=${startIndex}&maxResults=20`)
       .then(res => res.json())
       .then(data => {
@@ -44,7 +45,7 @@ export default function App() {
     setSearchQuery(text)
     setText("")
   }
-
+  
   function toggleFavorite(bookId){
         setFavorites(prev => {
             let updated
