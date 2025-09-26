@@ -11,6 +11,11 @@ export default function App() {
   const [books, setBooks] = useState([])
   const [startIndex, setStartIndex] = useState(0);
 
+  const [favorites, setFavorites] = useState(()=>{
+        const saved  = localStorage.getItem("favorites")
+        return saved ? JSON.parse(saved) : []
+    })
+
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&startIndex=${startIndex}&maxResults=20`)
       .then(res => res.json())
@@ -40,11 +45,29 @@ export default function App() {
     setText("")
   }
 
+  function toggleFavorite(bookId){
+        setFavorites(prev => {
+            let updated
+            if (prev.includes(bookId)){
+                updated = prev.filter(id => id !== bookId)
+            } else{
+                updated = [...prev, bookId]
+            }
+            localStorage.setItem("favorites", JSON.stringify(updated))
+            return updated
+        })
+    }
+
   return (
     <>
       <Header />
       <SearchBar text={text} setText={setText} onSearch={onSearch}/>
-      <BookList books={books} loadMoreRef={loadMoreRef}/>
+      <BookList 
+        books={books} 
+        loadMoreRef={loadMoreRef} 
+        favorites={favorites} 
+        toggleFavorite={toggleFavorite}
+      />
     </>
   )
 }
