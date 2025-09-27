@@ -18,7 +18,7 @@ export default function App() {
 
   useEffect(() => {
     if (!searchQuery) return;
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&startIndex=${startIndex}&maxResults=20`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&startIndex=${startIndex}&maxResults=10`)
       .then(res => res.json())
       .then(data => {
         setBooks(prev => [...prev, ...(data.items || [])])
@@ -28,7 +28,7 @@ export default function App() {
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       if(entries[0].isIntersecting){
-        setStartIndex(prev => prev + 20)
+        setStartIndex(prev => prev + 10)
       }
     })
 
