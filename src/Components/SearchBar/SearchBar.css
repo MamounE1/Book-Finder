@@ -36,3 +36,8 @@
     font-style: italic;
     font-weight: 400;
 }
+
+.searchBar:focus {
+    outline: none;
+    box-shadow: 0 0 12px rgba(105, 105, 105, 0.4);
+}
