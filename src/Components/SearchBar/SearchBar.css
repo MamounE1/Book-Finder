@@ -9,6 +9,7 @@
 }
 
 .searchBar{
+    color: hsl(210, 20%, 60%);
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     width: 100%;
