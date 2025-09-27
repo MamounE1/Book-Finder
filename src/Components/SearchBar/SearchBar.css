@@ -1,11 +1,30 @@
 .searchContainer{
-    margin: 1rem;
-}
-.searchBar{
-    padding: 0.3rem;
-    width: 25rem;
+    margin-top: 2rem;
+    margin-left: 7rem;
 }
 
-.searchButton{
-    padding: 0.3rem;
+.inputWrapper {
+    position: relative;
+    width: 12rem;       
+}
+
+.searchBar{
+    width: 100%;
+    padding-right: 2.5rem;
+    padding-left: 0.5rem;
+    height: 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+}
+
+.searchIcon {
+    position: absolute;
+    right: 0.5rem;         
+    top: 50%;              
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 1.2rem;
+    width: 1.2rem;
 }

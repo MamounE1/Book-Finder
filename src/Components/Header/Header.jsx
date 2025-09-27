@@ -1,9 +1,10 @@
 import "./Header.css"
+import LitScoutLogo from "../../images/LitScout.png";
 
 export default function Header(){
     return (
         <header>
-            <h1 className="title">LitScout</h1>
+            <img className="title" src={LitScoutLogo} alt="LitScout Logo"/>
         </header>
     )
 }
