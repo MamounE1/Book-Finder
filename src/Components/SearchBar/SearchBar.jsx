@@ -1,7 +1,7 @@
 import "./SearchBar.css"
 import { Search } from "lucide-react"
 
-export default function SearchBar({text, setText, onSearch}){
+export default function SearchBar({text, setText, onSearch , showFavorites, setShowFavorites}){
     return (
         <div className="searchContainer">
             <div className="inputWrapper">
@@ -14,6 +14,9 @@ export default function SearchBar({text, setText, onSearch}){
                 />
                 <Search className="searchIcon" onClick={onSearch} />
             </div>
+            <button className="favBtn" onClick={() => setShowFavorites(prev => !prev)}>
+                    {showFavorites ? "Show All books" : "Show Favorites"}
+            </button>
         </div>
     )
 }

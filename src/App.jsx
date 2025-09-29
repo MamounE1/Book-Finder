@@ -10,6 +10,7 @@ export default function App() {
   const [text, setText] = useState("")
   const [books, setBooks] = useState([])
   const [startIndex, setStartIndex] = useState(0);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   const [favorites, setFavorites] = useState(()=>{
         const saved  = localStorage.getItem("favorites")
@@ -26,6 +27,8 @@ export default function App() {
   }, [startIndex, searchQuery])
 
   useEffect(() => {
+    if (showFavorites) return;
+
     const observer = new IntersectionObserver(entries => {
       if(entries[0].isIntersecting){
         setStartIndex(prev => prev + 10)
@@ -37,7 +40,7 @@ export default function App() {
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [showFavorites])
   
   function onSearch(){
     setBooks([])
@@ -62,9 +65,15 @@ export default function App() {
   return (
     <>
       <Header />
-      <SearchBar text={text} setText={setText} onSearch={onSearch}/>
+      <SearchBar 
+        text={text} 
+        setText={setText} 
+        onSearch={onSearch}
+        showFavorites={showFavorites}
+        setShowFavorites={setShowFavorites}
+      />
       <BookList 
-        books={books} 
+        books={showFavorites ? books.filter(book => favorites.includes(book.id)) : books} 
         loadMoreRef={loadMoreRef} 
         favorites={favorites} 
         toggleFavorite={toggleFavorite}
