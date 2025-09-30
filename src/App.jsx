@@ -1,53 +1,13 @@
-import { useState, useEffect, useRef } from "react"
-import BookList from "./Components/BookList/BookList.jsx"
-import Header from "./Components/Header/Header.jsx"
-import SearchBar from "./Components/SearchBar/SearchBar.jsx"
-import "./index.css"
+import { Routes, Route } from "react-router-dom"
+import { useState } from "react";
+import BookListPage from "./Pages/BookListPage.jsx";
+import BookDetailsPage from "./Pages/BookDetailsPage.jsx";
 
 export default function App() {
-  const loadMoreRef = useRef(null);
-  const [searchQuery, setSearchQuery] = useState("")
-  const [text, setText] = useState("")
-  const [books, setBooks] = useState([])
-  const [startIndex, setStartIndex] = useState(0);
-  const [showFavorites, setShowFavorites] = useState(false);
-
   const [favorites, setFavorites] = useState(()=>{
-        const saved  = localStorage.getItem("favorites")
-        return saved ? JSON.parse(saved) : []
-    })
-
-  useEffect(() => {
-    if (!searchQuery) return;
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&startIndex=${startIndex}&maxResults=10`)
-      .then(res => res.json())
-      .then(data => {
-        setBooks(prev => [...prev, ...(data.items || [])])
+          const saved  = localStorage.getItem("favorites")
+          return saved ? JSON.parse(saved) : []
       })
-  }, [startIndex, searchQuery])
-
-  useEffect(() => {
-    if (showFavorites) return;
-
-    const observer = new IntersectionObserver(entries => {
-      if(entries[0].isIntersecting){
-        setStartIndex(prev => prev + 10)
-      }
-    })
-
-    if(loadMoreRef.current){
-      observer.observe(loadMoreRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [showFavorites])
-  
-  function onSearch(){
-    setBooks([])
-    setStartIndex(0)
-    setSearchQuery(text)
-    setText("")
-  }
   
   function toggleFavorite(bookId){
         setFavorites(prev => {
@@ -60,24 +20,28 @@ export default function App() {
             localStorage.setItem("favorites", JSON.stringify(updated))
             return updated
         })
-    }
+  }
 
   return (
-    <>
-      <Header />
-      <SearchBar 
-        text={text} 
-        setText={setText} 
-        onSearch={onSearch}
-        showFavorites={showFavorites}
-        setShowFavorites={setShowFavorites}
+    <Routes>
+      <Route 
+        path="/" 
+        element={
+          <BookListPage 
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
+          />
+        } 
       />
-      <BookList 
-        books={showFavorites ? books.filter(book => favorites.includes(book.id)) : books} 
-        loadMoreRef={loadMoreRef} 
-        favorites={favorites} 
-        toggleFavorite={toggleFavorite}
+      <Route 
+        path="/book/:id" 
+        element={
+          <BookDetailsPage 
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
+          />
+        } 
       />
-    </>
+    </Routes>
   )
 }

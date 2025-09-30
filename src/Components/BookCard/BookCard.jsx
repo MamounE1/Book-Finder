@@ -1,4 +1,5 @@
 import "./BookCard.css"
+import { Link } from "react-router-dom";
 import { Heart } from "lucide-react"
 
 export default function BookCard({book, isFavorite, toggleFavorite}){
@@ -11,11 +12,15 @@ export default function BookCard({book, isFavorite, toggleFavorite}){
             />
             <div className="imageWrapper">
                 {book.volumeInfo.imageLinks?.thumbnail ? (
-                    <img className="imgStyle" src={book.volumeInfo.imageLinks.thumbnail} alt="No Image"></img>
+                    <Link to={`/book/${book.id}`}>
+                        <img className="imgStyle" src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}></img>
+                    </Link>
                 ) : null}
             </div>
             <div className="infoWrapper">
-                <p>{book.volumeInfo.title}</p>
+                <Link to={`/book/${book.id}`}>
+                    <p>{book.volumeInfo.title}</p>
+                </Link>
                 <div>
                     {book.volumeInfo.authors?.map((author, index) => (
                         <span key={index}>

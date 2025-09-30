@@ -1,0 +1,26 @@
+.bookDetailsCard{
+    display: flex;
+    flex-direction: column;
+    margin: 10rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: hsl(210, 20%, 60%);
+}
+
+.mainInfoWrapper{
+    display: flex;
+    gap: 4rem;
+    padding: 2rem 4rem;
+    background-color: white;
+}
+
+.extraInfo{
+    margin-top: 3rem;
+    padding: 2rem 4rem;
+    width: 10rem;
+    background-color: white;
+}
+
+.bookImage{
+    width: 10rem;
+}
